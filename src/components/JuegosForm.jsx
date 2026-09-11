@@ -1,18 +1,27 @@
 import { Button, Card, CardActions, CardContent, CardHeader, FormControlLabel, MenuItem, Select, Switch, TextField } from '@mui/material'
 import { DatePicker } from '@mui/x-date-pickers';
 import React, { useState } from 'react'
-
+// todo lo que yo pase como parametro a la funcion de un componente se llama property
 function JuegosForm({onCreateJuego= ()=>{}}) {
     const companias = [{ label: "Sony", value: "sony" },
     { label: "Microsoft", value: "microsoft" },
     { label: "Nintendo", value: "nintendo" }];
-
+    //todo elemento que yo defina como useState corresponde a una propiedad del estado del componente
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [compania, setCompania] = useState(companias[0].value);
     const [plataforma, setPlataforma] = useState("");
     const [anio, setAnio] = useState(null);
     const [tieneFisico, setTieneFisico] = useState(false);
+
+    const limpiarFormulario =()=>{
+        setNombre("");
+        setDescripcion("");
+        setCompania(companias[0].value);
+        setPlataforma("");
+        setAnio(null);
+        setTieneFisico(false);
+    }
 
     const handleClick = ()=>{
         //1. Crear un objeto con el contenido del juego
@@ -26,6 +35,7 @@ function JuegosForm({onCreateJuego= ()=>{}}) {
         juego.tieneFisico = tieneFisico;
         //2. "avisarle" al container que hay un nuevo juego
         onCreateJuego(juego);
+        limpiarFormulario();
     }
 
     return (
